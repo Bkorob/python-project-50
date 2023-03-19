@@ -3,13 +3,13 @@ import argparse
 
 
 def main():
-    # Создание описания программы.
+    # Создание описания программы. 
     # ArgumentParser читает аргументы КС, которые мы передаём.
-    parser = argparse.ArgumentParser(
-        description="Compares two configuration files and shows a difference."
+    parser = argparse.ArgumentParser(description =
+        "Compares two configuration files and shows a difference."
     )
     # Назначение именовынных аргументов
-    # Порядок назначения элементов влияет на очерёдность передачи.
+    # (позиционные обозначаются, как "-..."/"--...").
     parser.add_argument('first_file')
     parser.add_argument('second_file')
     # Назначемние позиционных рагументов,
