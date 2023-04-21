@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import argparse
 
 
@@ -16,4 +15,13 @@ def parse_arguments():
     # help - описание аргумента для представления -h
     parser.add_argument('-f', '--format', help='set format of output')
     # parse_args создаёт структуру принимающую данные.
-    return parser.parse_args()
+    args = parser.parse_args()
+    return args
+
+
+def main():
+    parse_arguments()
+    
+
+if __name__ == "__main__":
+    main()
