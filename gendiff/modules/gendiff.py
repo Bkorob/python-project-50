@@ -1,7 +1,7 @@
 import json
 
 
-def generate_result(first_file, second_file):
+def generate_result():
     first_file = json.load(open('gendiff/files/json/file1.json'))
     second_file = json.load(open('gendiff/files/json/file2.json'))
     result = {}
@@ -22,14 +22,14 @@ def generate_result(first_file, second_file):
 
 def get_print(generate_result):
         print("{")
-        for key in generate_result.result:
-            if isinstance(generate_result.result[key], bool):
-                print(key, ':', str(generate_result.result[key]).lower())
+        for key, val in generate_result().items():
+            if isinstance(val, bool):
+                print(key, ':', str(val).lower())
             else:
-                print(key, ':', generate_result.result[key])
+                print(key, ':', val)
         print("}")
 
 
 if __name__ == '__main__':
-    generate_result(first_file, second_file)
+    generate_result()
     get_print(generate_result)
