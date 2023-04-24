@@ -31,7 +31,6 @@ def get_print(generate_result):
 
 
 def main():
-    
     generate_result(first_file, second_file)
     get_print(generate_result)
     

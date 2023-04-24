@@ -13,15 +13,8 @@ def parse_arguments():
     parser.add_argument('second_file')
     # Назначемние позиционных рагументов,
     # help - описание аргумента для представления -h
+    # создание именованного аргумента
     parser.add_argument('-f', '--format', help='set format of output')
     # parse_args создаёт структуру принимающую данные.
     args = parser.parse_args()
     return args
-
-
-def main():
-    parse_arguments()
-    
-
-if __name__ == "__main__":
-    main()
