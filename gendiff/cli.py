@@ -18,3 +18,7 @@ def parse_arguments():
     # parse_args создаёт структуру принимающую данные.
     args = parser.parse_args()
     return args
+
+
+if __name__ == '__main__':
+    parse_arguments()
