@@ -1,4 +1,4 @@
-from gendiff.generate_diff import get_dict_print
+from .generate_diff import *
+from .cli import *
 
-
-__all__ = get_dict_print
+__all__ = ('get_dict_print', 'parse_arguments')
