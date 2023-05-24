@@ -1,4 +1,5 @@
 import json
+import re
 
 
 def generate_result(file1, file2):
@@ -21,13 +22,10 @@ def generate_result(file1, file2):
     return result
 
 
-def get_dict_print(first_file, second_file):
+def get_final_result(first_file, second_file):
     file1 = json.load(open(first_file))
     file2 = json.load(open(second_file))
-    print("{")
-    for key, val in generate_result(file1, file2).items():
-        if isinstance(val, bool):
-            print(key, ':', str(val).lower())
-        else:
-            print(key, ':', val)
-    print("}")
+    dict_result = json.dumps(generate_result(file1, file2), indent=2)
+    result = re.sub(r'"', '', dict_result)
+    print(result)
+    return result
