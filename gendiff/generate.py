@@ -22,10 +22,9 @@ def generate_result(file1, file2):
     return result
 
 
-def get_final_result(first_file, second_file):
+def generate_diff(first_file, second_file):
     file1 = json.load(open(first_file))
     file2 = json.load(open(second_file))
     dict_result = json.dumps(generate_result(file1, file2), indent=2)
-    result = re.sub(r'"', '', dict_result)
-    print(result)
-    return result
+    diff = re.sub(r'"', '', dict_result)
+    return diff

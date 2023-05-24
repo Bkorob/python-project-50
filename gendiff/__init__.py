@@ -1,4 +1,4 @@
-from .generate_diff import get_final_result
+from .generate import generate_diff
 from .cli import parse_arguments
 
-__all__ = ('get_final_result', 'parse_arguments')
+__all__ = ('generate_diff', 'parse_arguments')
