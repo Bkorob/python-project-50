@@ -11,7 +11,7 @@ def main():
     file_path1 = pathes.first_file
     file_path2 = pathes.second_file
     # принтуем вызов основной фунции, с указанными ранее переменными
-    gendiff.generate_diff(file_path1, file_path2)
+    print(gendiff.generate_diff(file_path1, file_path2))
 
 
 if __name__ == '__main__':
