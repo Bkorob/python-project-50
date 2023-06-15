@@ -1,6 +1,7 @@
 import json
 import re
 
+
 def generate_result(file1, file2):
     result = {}
 
