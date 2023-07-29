@@ -36,7 +36,7 @@ def test_yml_generate_diff():
         diff = generate_diff(file1, file2)
         assert result == diff
         
-def test_yaml_different_format()
+def test_yaml_different_format():
     file1 = "../tests/fixtures/file1.yml"
     file2 = "../tests/fixtures/file2.yaml"
     with open("../tests/fixtures/correct_result.txt") as cr:
