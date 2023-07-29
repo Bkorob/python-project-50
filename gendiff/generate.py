@@ -1,10 +1,10 @@
-import json
+import json, yaml 
 import re
 
 
 def generate_result(file1, file2):
     result = {}
-
+    
     for key1 in file1:
         if key1 in file2 and file1[key1] == file2[key1]:
             result[f"  {key1}"] = file1[key1]
@@ -22,9 +22,25 @@ def generate_result(file1, file2):
 
 
 def generate_diff(first_file, second_file):
-    file1 = json.load(open(first_file))
-    file2 = json.load(open(second_file))
+    if first_file.endswith('.json'):
+        file1 = json.load(open(first_file))
+    file1 = yaml.safe_load(open(first_file))
+    if second_file.endswith('.json'):
+        file2 = json.load(open(second_file))
+    file2 = yaml.safe_load(open(second_file))
     result = dict(sorted(generate_result(file1, file2).items(), key=lambda x: x[0][2]))
     dict_result = json.dumps(result, indent=2)
     diff = re.sub(r'[",]', '', dict_result)
     return diff
+
+# def generate_diff(first_file, second_file):
+#     if first_file.endswith('.json'):
+#         file1 = json.load(open(first_file))
+#     file1 = yaml.safe_load(first_file)
+#     if second_file.endswith('.json'):
+#         file2 = json.load(open(second_file))
+#     file2 = yaml.safe_load(second_file)
+#     result = dict(sorted(generate_result(file1, file2).items(), key=lambda x: x[0][2]))
+#     dict_result = json.dumps(result, indent=2)
+#     diff = re.sub(r'[",]', '', dict_result)
+#     return diff
