@@ -1,10 +1,11 @@
-import json, yaml 
+import json
+import yaml
 import re
 
 
 def generate_result(file1, file2):
     result = {}
-    
+
     for key1 in file1:
         if key1 in file2 and file1[key1] == file2[key1]:
             result[f"  {key1}"] = file1[key1]
