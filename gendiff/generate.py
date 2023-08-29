@@ -5,7 +5,7 @@ import re
 
 def generate_result(file1, file2):
     result = {}
-    keys = set(file1.keys()) | set(file2.keys())
+    keys = file1.keys() | file2.keys()    
     for key in sorted(keys):
         if key not in file2:
             result[f'- {key}'] = file1[key]
