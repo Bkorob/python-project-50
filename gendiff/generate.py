@@ -18,26 +18,14 @@ def generate_result(file1, file2):
         else:
             result[f'+ {key}'] = file2[key]
     return result
-    # for key1 in file1:
-    #     if key1 in file2 and file1[key1] == file2[key1]:
-    #         result[f"  {key1}"] = file1[key1]
-    #     elif key1 in file2 and file1[key1] != file2[key1]:
-    #         result[f"- {key1}"] = file1[key1]
-    #         result[f"+ {key1}"] = file2[key1]
-    #     else:
-    #         result[f"- {key1}"] = file1[key1]
 
-    # for key2 in file2:
-    #     if key2 not in file1:
-    #         result[f"+ {key2}"] = file2[key2]
-    # return result
 
-def converting(source):
-    name = source.split('.')[1]
-    if name == 'yml':
-        source = yaml.safe_load(open(source))
-    elif name == 'json':
-        source = json.load(open(source))
+def converting(path):
+    filepath = path
+    if filepath.endswith('yaml') or filepath.endswith('yml'):
+        source = yaml.safe_load(open(path))
+        return source
+    source = json.load(open(path))
     return source
 
 
