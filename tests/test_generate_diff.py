@@ -1,45 +1,46 @@
 from gendiff import generate_diff
 
 
-def test_json_generate_some():
-    file1 = './tests/fixtures/file1.json'
-    file2 = './tests/fixtures/file2.json'
+def test_generate_json_flat_diff():
+    file1 = './tests/fixtures/flat1.json'
+    file2 = './tests/fixtures/flat2.json'
     with open('./tests/fixtures/correct_result_flat.txt') as cr:
         result = cr.read()
         diff = generate_diff(file1, file2)
         assert result == diff
 
 
-def test_json_generate_different():
-    file1 = './tests/fixtures/file1.json'
-    file2 = './tests/fixtures/file3.json'
-    with open('./tests/fixtures/correct_result2_flat.txt') as cr:
+def test_generate_yaml_flat_diff():
+    file1 = "./tests/fixtures/flat1.yml"
+    file2 = "./tests/fixtures/flat2.yml"
+    with open("./tests/fixtures/correct_result_flat.txt") as cr:
         result = cr.read()
         diff = generate_diff(file1, file2)
         assert result == diff
 
 
-def test_json_generate_same():
-    file1 = './tests/fixtures/file1.json'
-    file2 = './tests/fixtures/file1.json'
-    with open('./tests/fixtures/correct_result3_flat.txt') as cr:
+def test_generate_different_yml_formats_diff():
+    file1 = './tests/fixtures/flat1.yml'
+    file2 = './tests/fixtures/flat2.yaml'
+    with open('./tests/fixtures/correct_result_flat.txt') as cr:
         result = cr.read()
         diff = generate_diff(file1, file2)
         assert result == diff
+
         
-        
-def test_yml_generate_diff():
-    file1 = "./tests/fixtures/file1.yml"
-    file2 = "./tests/fixtures/file2.yml"
+def test_different_format_file():
+    file1 = "./tests/fixtures/flat1.yml"
+    file2 = "./tests/fixtures/flat2.json"
     with open("./tests/fixtures/correct_result_flat.txt") as cr:
         result = cr.read()
         diff = generate_diff(file1, file2)
         assert result == diff
         
-def test_yaml_different_format():
-    file1 = "./tests/fixtures/file1.yml"
-    file2 = "./tests/fixtures/file2.json"
-    with open("./tests/fixtures/correct_result_flat.txt") as cr:
+        
+def test_generate_deep_yml_deef():
+    file1 = "./tests/fixtures/tree1.yml"
+    file2 = "./tests/fixtures/tree2.yml"
+    with open("./tests/fixtures/correct_result_deep.txt") as cr:
         result = cr.read()
         diff = generate_diff(file1, file2)
         assert result == diff

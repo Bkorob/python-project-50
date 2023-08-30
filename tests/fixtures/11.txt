@@ -1,32 +1,4 @@
-import json
-
-
-def stylish(data, indent_size=4, depth=1):
-    result = []
-    indent = ' ' * indent_size * depth
-    result.append('{\n')
-    for elem in data:
-        if isinstance(elem, dict):
-            if elem['meta'] == 'added':
-                result.append(f'{indent}+ {elem["key"]}: {elem["value"]}')
-            elif elem['meta'] == 'deleted':
-                result.append(f'{indent}- {elem["key"]}: {elem["value"]}')
-            elif elem['meta'] == 'unchanged':
-                result.append(f'{indent}  {elem["key"]}: {elem["value"]}')
-            elif elem['meta'] == 'changed':
-                result.append(f'{indent}- {elem["key"]}: {elem["value1"]}')
-                result.append(f'{indent}+ {elem["key"]}: {elem["value2"]}')
-            elif elem['meta'] == 'children':
-                result.append(f'{indent}  {elem["key"]}: {stylish(elem["value"], indent_size, depth +1)}')
-
-        else:
-            result.append('\n' + indent + elem)
-            
-    return '\n'.join(result)
-    # return result
-
-
-data = [{'key': 'common',
+[{'key': 'common',
   'meta': 'children',
   'value': [{'key': 'follow', 'meta': 'added', 'value': False},
             {'key': 'setting1', 'meta': 'unchanged', 'value': 'Value 1'},
@@ -64,5 +36,3 @@ data = [{'key': 'common',
  {'key': 'group3',
   'meta': 'added',
   'value': {'deep': {'id': {'number': 45}}, 'fee': 100500}}]
-
-print(stylish(data))           
