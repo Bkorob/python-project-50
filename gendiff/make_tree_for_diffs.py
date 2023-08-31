@@ -1,4 +1,7 @@
 import yaml
+import json
+from pprint import pprint
+
 
 
 def make_tree_recursive(file1, file2):
@@ -27,11 +30,14 @@ def make_tree_recursive(file1, file2):
             elif file1[key] != file2[key]:
                 tree.append({
                     'key': key,
-                    'value1': file1[key],
-                    'value2': file2[key],
-                    'meta': 'changed'
+                    'value': file1[key],
+                    'meta': 'changed-'
                 })
-                
+                tree.append({
+                    'key': key,
+                    'value': file2[key],
+                    'meta': 'changed+'
+                })                
         else:
             tree.append({
                 'key': key,
@@ -39,4 +45,10 @@ def make_tree_recursive(file1, file2):
                 'meta': 'added'
             })
     return tree
-                    
+
+
+file1 = yaml.safe_load(open("./tests/fixtures/tree1.yml"))
+file2 = yaml.safe_load(open("./tests/fixtures/tree2.yml"))
+with open("./tests/fixtures/internal_state.json", "w") as w:
+    w.write(json.dumps(make_tree_recursive(file1, file2), indent=2))
+
