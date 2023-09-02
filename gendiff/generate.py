@@ -20,18 +20,23 @@ def generate_result(file1, file2):
     return result
 
 
-def converting(path):
+def parse_file(path):
     filepath = path
     if filepath.endswith('yaml') or filepath.endswith('yml'):
-        source = yaml.safe_load(open(path))
-        return source
-    source = json.load(open(path))
-    return source
+        with open(path) as p_y:
+            source = yaml.safe_load(p_y)
+            return source
+    elif filepath.endswith('json'):
+        with open(path) as p_j:
+            source = json.load(p_j)
+            return source
+    return parse_file
+    
 
 
 def generate_diff(first_file, second_file):
-    file1 = converting(first_file)
-    file2 = converting(second_file)
+    file1 = parse_file(first_file)
+    file2 = parse_file(second_file)
     result = dict(sorted(generate_result(file1, file2).items(), key=lambda x: x[0][2]))
     dict_result = json.dumps(result, indent=2)
     diff = re.sub(r'[",]', '', dict_result)

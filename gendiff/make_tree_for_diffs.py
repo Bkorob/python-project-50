@@ -30,12 +30,12 @@ def make_tree_recursive(file1, file2):
             elif file1[key] != file2[key]:
                 tree.append({
                     'key': key,
-                    'value': file1[key],
+                    'value': file2[key],
                     'meta': 'changed-'
                 })
                 tree.append({
                     'key': key,
-                    'value': file2[key],
+                    'value': file1[key],
                     'meta': 'changed+'
                 })                
         else:

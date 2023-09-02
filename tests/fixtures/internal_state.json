@@ -19,12 +19,12 @@
       },
       {
         "key": "setting3",
-        "value": null,
+        "value": true,
         "meta": "changed-"
       },
       {
         "key": "setting3",
-        "value": true,
+        "value": null,
         "meta": "changed+"
       },
       {
@@ -47,12 +47,12 @@
             "value": [
               {
                 "key": "wow",
-                "value": "so much",
+                "value": "",
                 "meta": "changed-"
               },
               {
                 "key": "wow",
-                "value": "",
+                "value": "so much",
                 "meta": "changed+"
               }
             ],
@@ -79,12 +79,12 @@
     "value": [
       {
         "key": "baz",
-        "value": "bars",
+        "value": "bas",
         "meta": "changed-"
       },
       {
         "key": "baz",
-        "value": "bas",
+        "value": "bars",
         "meta": "changed+"
       },
       {
@@ -94,14 +94,14 @@
       },
       {
         "key": "nest",
-        "value": "str",
+        "value": {
+          "key": "value"
+        },
         "meta": "changed-"
       },
       {
         "key": "nest",
-        "value": {
-          "key": "value"
-        },
+        "value": "str",
         "meta": "changed+"
       }
     ],
