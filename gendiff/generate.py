@@ -1,23 +1,49 @@
 import json
 import yaml
 import re
+from .formatters import stylish
 
-
-def generate_result(file1, file2):
-    result = {}
+def make_performance(file1, file2):
+    tree = []
     keys = file1.keys() | file2.keys()
     for key in sorted(keys):
         if key not in file2:
-            result[f'- {key}'] = file1[key]
+            tree.append({
+                'key': key,
+                'value': file1[key],
+                'meta': 'deleted'
+            })
         elif key in file1 and key in file2:
-            if file2[key] != file1[key]:
-                result[f"- {key}"] = file1[key]
-                result[f"+ {key}"] = file2[key]
+            if all(map(lambda x: isinstance(x, dict), (file1[key], file2[key]))):
+                tree.append({
+                    'key': key,
+                    'value': make_performance(file1[key], file2[key]),
+                    'meta': 'children'
+                })
             elif file1[key] == file2[key]:
-                result[f'  {key}'] = file1[key]
+                tree.append({
+                    'key': key,
+                    'value': file1[key],
+                    'meta': 'unchanged'
+                })
+            elif file1[key] != file2[key]:
+                tree.append({
+                    'key': key,
+                    'value': file2[key],
+                    'meta': 'changed-'
+                })
+                tree.append({
+                    'key': key,
+                    'value': file1[key],
+                    'meta': 'changed+'
+                })                
         else:
-            result[f'+ {key}'] = file2[key]
-    return result
+            tree.append({
+                'key': key,
+                'value': file2[key],
+                'meta': 'added'
+            })
+    return tree
 
 
 def parse_file(path):
@@ -30,14 +56,13 @@ def parse_file(path):
         with open(path) as p_j:
             source = json.load(p_j)
             return source
-    return parse_file
-    
+    raise ValueError('Unsupported file format')
 
 
-def generate_diff(first_file, second_file):
+def generate_diff(first_file, second_file, formatter=stylish):
     file1 = parse_file(first_file)
     file2 = parse_file(second_file)
-    result = dict(sorted(generate_result(file1, file2).items(), key=lambda x: x[0][2]))
-    dict_result = json.dumps(result, indent=2)
-    diff = re.sub(r'[",]', '', dict_result)
+    intermediate_result = make_performance(file1, file2)
+    result = formatter(intermediate_result)
+    diff = re.sub(r'[",]', '', result)
     return diff
