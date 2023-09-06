@@ -25,21 +25,17 @@ def stylish(data, indent_size=4, depth=0):
                     sign = '- '
                 case 'changed+':
                     sign = '+ '    
-            indent =  ' ' * (depth * indent_size-2) + sign if depth > 0 else ' ' * (indent_size-2) + sign
+            indent =  ' ' * (depth * indent_size-2) if depth > 0 else ' ' * (indent_size-2)
             if isinstance(elem['value'], dict):
-                result.append(f'{indent}  {elem["key"]}: {stylish(elem["value"], indent_size, depth+1)}')
+                result.append(f'{indent}  {sign}{elem["key"]}: {stylish(elem["value"], indent_size, depth+1)}')
             elif elem['meta'] == 'children':
-                result.append(f'{indent}  {elem["key"]}: {stylish(elem["value"], indent_size, depth +1)}')
+                result.append(f'{indent}  {sign}{elem["key"]}: {stylish(elem["value"], indent_size, depth +1)}')
             else:
-                result.append(f'{indent}  {elem["key"]}: {elem["value"]}\n')
+                result.append(f'{indent}  {sign}{elem["key"]}: {convert_value(elem["value"])}\n')
         else:
-            indent =  ' ' * (depth * indent_size-2) + sign if depth > 0 else ' ' * (indent_size-2) + sign
-            result.append(f'{indent}  {elem}: {data[elem]}\n')
-    indent =  ' ' * (depth * indent_size)
+            indent =  ' ' * (depth * indent_size-2) if depth > 0 else ' ' * (indent_size-2)
+            result.append(f'{indent}    {sign}{elem}: {convert_value(data[elem])}\n')
+    indent =  ' ' * (depth * indent_size-2)
     result.append(indent + '}\n')           
     return ''.join(result)
-               
-
-
-
 
