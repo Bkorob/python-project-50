@@ -1,7 +1,7 @@
 import json
 import yaml
 import re
-from .formatters import stylish
+from .formatters.stylish import stylish
 
 def make_performance(file1, file2):
     tree = []
