@@ -5,6 +5,19 @@ def convert_value(value):
     return CONVERTING_VALUE.get(value, value)
 
 
+def get_sign(value):
+    count = 1
+    if value['meta'] == 'added':
+        return '+ '
+    elif value['meta'] == 'deleted':
+        return '- '
+    elif value['meta'] == 'changed':
+        count +=1
+        return '- ' if count//2 else '+ '
+    else:
+        return '  '
+    
+
 def stylish(data, depth=1): #пока идея такая 
     result = ''
     for elem in data:
