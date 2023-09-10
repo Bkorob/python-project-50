@@ -2,7 +2,9 @@ CONVERTING_VALUE = {False: 'false', None: 'null', True: 'true'}
 
 
 def convert_value(value):
-    return CONVERTING_VALUE.get(value, value)
+    if isinstance(value, bool) or value == None:
+        return CONVERTING_VALUE[value]
+    return value
 
 
 def get_sign(value):
@@ -24,19 +26,20 @@ def stylish(data, indent_size=4, depth=0):
     result.append('{')
     
     for elem in data:
-        value = data[elem]["value"]
-        key = data[elem]["key"]
-        if isinstance(data[elem], dict):   
+        
+        if isinstance(data[elem], dict):
+            value = data[elem]["value"]
+            key = data[elem]["key"]   
             indent =  ' ' * (depth * indent_size-2) if depth > 0 else ' ' * (indent_size-2)
             if isinstance(value, dict):
-                result.append(f'{indent}  {get_sign(data[elem])}{key}}: {stylish(value, indent_size, depth+1)}')
+                result.append(f'{indent}  {get_sign(data[elem])}{key}: {stylish(value, indent_size, depth+1)}')
             elif data[elem]['meta'] == 'children':
                 result.append(f'{indent}  {get_sign(data[elem])}{key}: {stylish(value, indent_size, depth +1)}')
             else:
                 result.append(f'{indent}  {get_sign(data[elem])}{key}: {convert_value(value)}')
         else:
             indent =  ' ' * (depth * indent_size) if depth > 0 else ' ' * (indent_size)
-            result.append(f'{indent}  {get_sign(data[elem])}{data[elem]} {value}')
+            result.append(f'{indent}    {data[elem]} {data[elem]}')
     indent =  ' ' * (depth * indent_size-2)
     result.append(indent + '}')           
     return '\n'.join(result)
