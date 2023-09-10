@@ -10,23 +10,28 @@ def make_inner_view(file1, file2):
     for key in sorted(keys):
         if key not in file2:
             tree[key] = {}
+            tree[key]['key'] = key
             tree[key]['value'] = file1[key]
             tree[key]['meta'] = 'deleted'
         elif key in file1 and key in file2:
             if isinstance(file1[key], dict) and isinstance(file2[key], dict):
                 tree[key] = {}
+                tree[key]['key'] = key
                 tree[key]['value'] = make_inner_view(file1[key], file2[key])
                 tree[key]['meta'] = 'children'
             elif file1[key] == file2[key]:
                 tree[key] = {}
+                tree[key]['key'] = key
                 tree[key]['value'] = file1[key],
                 tree[key]['meta'] = 'unchanged',
             elif file1[key] != file2[key]:
                 tree[key] = {}
+                tree[key]['key'] = key
                 tree[key]['value'] = (file2[key], file1[key])
                 tree[key]['meta'] = 'changed'              
         else:
             tree[key] = {}
+            tree[key]['key'] = key
             tree[key]['value'] =  file2[key]
             tree[key]['meta'] = 'added'
     return tree
