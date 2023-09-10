@@ -22,23 +22,24 @@ def stylish(data, indent_size=4, depth=0):
     result = []
     indent = ''
     result.append('{')
+    
     for elem in data:
+        value = data[elem]["value"]
+        key = data[elem]["key"]
         if isinstance(data[elem], dict):   
             indent =  ' ' * (depth * indent_size-2) if depth > 0 else ' ' * (indent_size-2)
-            if isinstance(data[elem]['value'], dict):
-                result.append(f'{indent}  {get_sign(data[elem])}{data[elem]["key"]}: {stylish(data[elem]["value"], indent_size, depth+1)}')
+            if isinstance(value, dict):
+                result.append(f'{indent}  {get_sign(data[elem])}{key}}: {stylish(value, indent_size, depth+1)}')
             elif data[elem]['meta'] == 'children':
-                result.append(f'{indent}  {get_sign(data[elem])}{data[elem]["key"]}: {stylish(data[elem]["value"], indent_size, depth +1)}')
+                result.append(f'{indent}  {get_sign(data[elem])}{key}: {stylish(value, indent_size, depth +1)}')
             else:
-                result.append(f'{indent}  {get_sign(data[elem])}{data[elem]["key"]}: {convert_value(data[elem]["value"])}')
+                result.append(f'{indent}  {get_sign(data[elem])}{key}: {convert_value(value)}')
         else:
             indent =  ' ' * (depth * indent_size) if depth > 0 else ' ' * (indent_size)
-            result.append(f'{indent}  {get_sign(data[elem])}{data[elem]} {data[elem]["value"]}')
+            result.append(f'{indent}  {get_sign(data[elem])}{data[elem]} {value}')
     indent =  ' ' * (depth * indent_size-2)
     result.append(indent + '}')           
     return '\n'.join(result)
-
-
 
 
 # def stylish(data, indent_size=4, depth=0):
