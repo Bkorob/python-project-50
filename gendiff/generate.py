@@ -5,77 +5,41 @@ from .formatters.stylish import stylish
 
 
 def make_inner_view(file1, file2):
-    tree = {}
+    tree = []
     keys = file1.keys() | file2.keys()
     for key in sorted(keys):
         if key not in file2:
-            tree[key] = {}
-            tree[key]['key'] = key
-            tree[key]['value'] = file1[key]
-            tree[key]['meta'] = 'deleted'
+            tree.append({
+                'key': key,
+                'value': file1[key],
+                'meta': 'deleted'
+            })
         elif key in file1 and key in file2:
             if isinstance(file1[key], dict) and isinstance(file2[key], dict):
-                tree[key] = {}
-                tree[key]['key'] = key
-                tree[key]['value'] = make_inner_view(file1[key], file2[key])
-                tree[key]['meta'] = 'children'
+                tree.append({
+                    'key': key,
+                    'value': make_inner_view(file1[key], file2[key]),
+                    'meta': 'children'
+                })
             elif file1[key] == file2[key]:
-                tree[key] = {}
-                tree[key]['key'] = key
-                tree[key]['value'] = file1[key],
-                tree[key]['meta'] = 'unchanged',
+                tree.append({
+                    'key': key,
+                    'value': file1[key],
+                    'meta': 'unchanged'
+                })
             elif file1[key] != file2[key]:
-                tree[key] = {}
-                tree[key]['key'] = key
-                tree[key]['value'] = (file2[key], file1[key])
-                tree[key]['meta'] = 'changed'              
+                tree.append({
+                    'key': key,
+                    'value': (file2[key], file1[key])
+                    'meta': 'changed'
+                })         
         else:
-            tree[key] = {}
-            tree[key]['key'] = key
-            tree[key]['value'] =  file2[key]
-            tree[key]['meta'] = 'added'
+            tree.append({
+                'key': key,
+                'value': file2[key],
+                'meta': 'added'
+            })
     return tree
-# def make_inner_view(file1, file2):
-#     tree = []
-#     keys = file1.keys() | file2.keys()
-#     for key in sorted(keys):
-#         if key not in file2:
-#             tree.append({
-#                 'key': key,
-#                 'value': file1[key],
-#                 'meta': 'deleted'
-#             })
-#         elif key in file1 and key in file2:
-#             if isinstance(file1[key], dict) and isinstance(file2[key], dict):
-#                 tree.append({
-#                     'key': key,
-#                     'value': make_inner_view(file1[key], file2[key]),
-#                     'meta': 'children'
-#                 })
-#             elif file1[key] == file2[key]:
-#                 tree.append({
-#                     'key': key,
-#                     'value': file1[key],
-#                     'meta': 'unchanged'
-#                 })
-#             elif file1[key] != file2[key]:
-#                 tree.append({
-#                     'key': key,
-#                     'value': file2[key],
-#                     'meta': 'changed-'
-#                 })
-#                 tree.append({
-#                     'key': key,
-#                     'value': file1[key],
-#                     'meta': 'changed+'
-#                 })                
-#         else:
-#             tree.append({
-#                 'key': key,
-#                 'value': file2[key],
-#                 'meta': 'added'
-#             })
-#     return tree
 
 
 def parse_file(path):
