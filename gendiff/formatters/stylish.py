@@ -1,10 +1,30 @@
-CONVERTING_VALUE = {False: 'false', None: 'null', True: 'true'}
+CONVERTING_VALUE = {
+        False: 'false',
+        None: 'null', 
+        True: 'true'
+        }
+INDENTS = {
+    'added': '+ ', 
+    'deleted': '- ', 
+    'unchanged': '  ',
+    'children': '  '
+    }
+DEFAULT_INDENT = 4
 
 
 def convert_value(value):
     if isinstance(value, bool) or value == None:
         return CONVERTING_VALUE[value]
     return value
+
+
+def get_indent(sign, depth, sep = ' '):
+    indent_size = (DEFAULT_INDENT * depth) - 2
+    if indent_size < 0:
+        indent = ''
+        return indent
+    indent = indent_size * sep + INDENTS.get(sign, '  ')
+    return indent
 
 
 def get_sign(value):
@@ -20,36 +40,23 @@ def get_sign(value):
         return '  '
 
 
-def stylish(data, indent_size=4, depth=0):
+def stylish(data, depth=1):
     result = []
-    sign = ''
-    indent = ''
-    result.append('{\n')
+    result.append('{')
     for elem in data:
         if isinstance(elem, dict):
-            if elem['meta'] not in data:
-                sign = '  '
-            match elem['meta']:
-                case 'added':
-                    sign = '+ '
-                case 'deleted':
-                    sign = '- '
-                case 'unchanged':
-                    sign = '  '
-                case 'changed-':
-                    sign = '- '
-                case 'changed+':
-                    sign = '+ '    
-            indent =  ' ' * (depth * indent_size-2) if depth > 0 else ' ' * (indent_size-2)
-            if isinstance(elem['value'], dict):
-                result.append(f'{indent}  {sign}{elem["key"]}: {stylish(elem["value"], indent_size, depth+1)}')
+            key = elem['key']
+            value = elem['value']  
+            if isinstance(value, dict):
+                result.append(f'{get_indent(elem["meta"], depth)}{key}: {stylish(value, depth+1)}')
             elif elem['meta'] == 'children':
-                result.append(f'{indent}  {sign}{elem["key"]}: {stylish(elem["value"], indent_size, depth +1)}')
+                result.append(f'{get_indent(elem["meta"], depth)}{key}: {stylish(value, depth +1)}')
             else:
-                result.append(f'{indent}  {sign}{elem["key"]}: {convert_value(elem["value"])}\n')
+                result.append(f'{get_indent(elem["meta"], depth)}{key}: {convert_value(value)}')
         else:
-            indent =  ' ' * (depth * indent_size-2) if depth > 0 else ' ' * (indent_size-2)
-            result.append(f'{indent}    {sign}{elem}: {convert_value(data[elem])}\n')
-    indent =  ' ' * (depth * indent_size-2)
-    result.append(indent + '}\n')           
-    return ''.join(result)
+            if isinstance(data[elem], dict):
+                result.append(f'{get_indent("  ", depth)}{elem}: {stylish(data[elem], depth+1)}')
+            else:
+                result.append(f'{get_indent("  ", depth)}{elem}: {convert_value(data[elem])}')            
+    result.append(get_indent('  ', depth-1) + '}')           
+    return '\n'.join(result)
