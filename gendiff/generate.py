@@ -30,9 +30,14 @@ def make_inner_view(file1, file2):
             elif file1[key] != file2[key]:
                 tree.append({
                     'key': key,
-                    'value': (file2[key], file1[key])
-                    'meta': 'changed'
-                })         
+                    'value': file1[key],
+                    'meta': 'deleted'
+                })
+                tree.append({
+                    'key': key,
+                    'value': file2[key],
+                    'meta': 'added'
+                })            
         else:
             tree.append({
                 'key': key,
