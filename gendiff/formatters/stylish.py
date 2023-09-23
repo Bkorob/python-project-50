@@ -45,16 +45,18 @@ def stylish(data, depth=1):
         if isinstance(elem, dict):
             key = elem['key']
             value = elem['value']
+            indent = get_indent(elem['meta'], depth)
             if isinstance(value, dict):
-                result.append(f'{get_indent(elem["meta"], depth)}{key}: {stylish(value, depth+1)}')
+                result.append(f'{indent}{key}: {stylish(value, depth+1)}')
             elif elem['meta'] == 'children':
-                result.append(f'{get_indent(elem["meta"], depth)}{key}: {stylish(value, depth +1)}')
+                result.append(f'{indent}{key}: {stylish(value, depth +1)}')
             else:
-                result.append(f'{get_indent(elem["meta"], depth)}{key}: {convert_value(value)}')
+                result.append(f'{indent}{key}: {convert_value(value)}')
         else:
+            indent = get_indent("  ", depth)
             if isinstance(data[elem], dict):
-                result.append(f'{get_indent("  ", depth)}{elem}: {stylish(data[elem], depth+1)}')
+                result.append(f'{indent}{elem}: {stylish(data[elem], depth+1)}')
             else:
-                result.append(f'{get_indent("  ", depth)}{elem}: {convert_value(data[elem])}')
+                result.append(f'{indent}{elem}: {convert_value(data[elem])}')
     result.append(get_indent('  ', depth - 1) + '}')
     return '\n'.join(result)
