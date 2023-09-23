@@ -47,9 +47,9 @@ def stylish(data, depth=1):
             value = elem['value']
             indent = get_indent(elem['meta'], depth)
             if isinstance(value, dict):
-                result.append(f'{indent}{key}: {stylish(value, depth+1)}')
+                result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
             elif elem['meta'] == 'children':
-                result.append(f'{indent}{key}: {stylish(value, depth +1)}')
+                result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
             else:
                 result.append(f'{indent}{key}: {convert_value(value)}')
         else:
