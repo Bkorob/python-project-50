@@ -5,7 +5,9 @@ CONVERTING_VALUE = {False: 'false',
 INDENTS = {'added': '+ ',
            'deleted': '- ',
            'unchanged': '  ',
-           'children': '  '
+           'children': '  ',
+           'changed+': '+ ',
+           'changed-': '- '
            }
 DEFAULT_INDENT = 4
 
@@ -25,19 +27,6 @@ def get_indent(sign, depth, sep=' '):
     return indent
 
 
-def get_sign(value):
-    count = 1
-    if value['meta'] == 'added':
-        return '+ '
-    elif value['meta'] == 'deleted':
-        return '- '
-    elif value['meta'] == 'changed':
-        count += 1
-        return '- ' if count // 2 else '+ '
-    else:
-        return '  '
-
-
 def stylish(data, depth=1):
     result = []
     result.append('{')
@@ -45,10 +34,11 @@ def stylish(data, depth=1):
         if isinstance(elem, dict):
             key = elem['key']
             value = elem['value']
-            indent = get_indent(elem['meta'], depth)
+            meta = elem['meta']
+            indent = get_indent(meta, depth)
             if isinstance(value, dict):
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
-            elif elem['meta'] == 'children':
+            elif meta == 'children':
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
             else:
                 result.append(f'{indent}{key}: {convert_value(value)}')
