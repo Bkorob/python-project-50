@@ -15,7 +15,7 @@ def plain(data, key_name=''):
         # if isinstance(value, dict):
         #     result +=  
         if meta == 'children':
-            result += plain(value) 
+            result += plain(value, key_name=elem['key']) 
         elif meta == 'added':
             result += f'Property {key_name} was added with value: {get_value(value)}\n'
         elif meta == 'deleted':
