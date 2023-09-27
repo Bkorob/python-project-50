@@ -1,5 +1,6 @@
 from gendiff.formatters.stylish import convert_value
 
+
 def get_value(value):
     if isinstance(value, dict):
         return '[complex value]'
@@ -20,14 +21,15 @@ def plain(data, key_name=''):
         if meta == 'children':
             result += plain(value, key_name=elem['key'])
         elif meta == 'changed+' or meta == 'changed-':
-            result += f'Property {get_path(key_name, key)} was updated.' 
-            f'From {get_value(value)} to {get_value(value)} # тут пока затык. 
+            result += (f'Property {get_path(key_name, key)} was updated.'
+                       f'From {get_value(value)} to {get_value(value)}')
+            # тут пока затык.
             # Видимо надо переделывать логику добавления внутреннего представления.
         elif meta == 'unchanged':
             continue
         elif meta == 'added':
-            result += f'Property {get_path(key_name, key)}' 
+            result += f'Property {get_path(key_name, key)}'
             f'was added with value: {get_value(value)}\n'
         elif meta == 'deleted':
             result += f'Property {get_path(key_name, key)} was removed\n'
-    return result 
+    return result
