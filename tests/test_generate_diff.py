@@ -1,4 +1,7 @@
 from gendiff import generate_diff
+from gendiff.formatters.plain import plain
+from gendiff.formatters.stylish import stylish
+
 
 
 def test_generate_json_flat_diff():
@@ -28,12 +31,12 @@ def test_different_format_file():
         assert result == diff
         
         
-def test_generate_tree_yml_tree():
+def test_generate_tree_yml_stylish_format():
     file1 = "./tests/fixtures/tree1.yml"
     file2 = "./tests/fixtures/tree2.yml"
     with open("./tests/fixtures/correct_result_tree.txt") as cr:
         result = cr.read()
-        diff = generate_diff(file1, file2)
+        diff = generate_diff(file1, file2, formatter=stylish)
         assert result == diff
         
         
@@ -44,3 +47,11 @@ def test_unsupported_format_file():
         generate_diff(file1, file2)
     except ValueError as v:
         assert v
+
+def test_generate_plain_format():
+    file1 = "./tests/fixtures/tree1.yml"
+    file2 = "./tests/fixtures/tree2.yml"
+    with open("./tests/fixtures/correct_result_tree_plain.txt") as cr:
+        result = cr.read()
+        diff = generate_diff(file1, file2, formatter=plain)
+        assert result == diff
