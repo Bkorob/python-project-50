@@ -1,7 +1,7 @@
 import json
 import yaml
-import re
 from .formatters.stylish import stylish
+from .formatters.plain import plain
 
 
 def make_inner_view(file1, file2):
@@ -30,13 +30,8 @@ def make_inner_view(file1, file2):
             elif file1[key] != file2[key]:
                 tree.append({
                     'key': key,
-                    'value': file1[key],
-                    'meta': 'deleted'
-                })
-                tree.append({
-                    'key': key,
-                    'value': file2[key],
-                    'meta': 'added'
+                    'value': (file1[key], file2[key]),
+                    'meta': 'changed'
                 })
         else:
             tree.append({
@@ -65,5 +60,4 @@ def generate_diff(first_file, second_file, formatter=stylish):
     file2 = parse_file(second_file)
     intermediate_result = make_inner_view(file1, file2)
     result = formatter(intermediate_result)
-    diff = re.sub(r'[",]', '', result)
-    return diff
+    return result
