@@ -6,8 +6,6 @@ INDENTS = {'added': '+ ',
            'deleted': '- ',
            'unchanged': '  ',
            'children': '  ',
-           'changed+': '+ ',
-           'changed-': '- '
            }
 DEFAULT_INDENT = 4
 
@@ -23,7 +21,7 @@ def get_indent(sign, depth, sep=' '):
     if indent_size < 0:
         indent = ''
         return indent
-    indent = indent_size * sep + INDENTS.get(sign, '  ')
+    indent = indent_size * sep + INDENTS.get(sign, sign)
     return indent
 
 
@@ -40,6 +38,17 @@ def stylish(data, depth=1):
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
             elif meta == 'children':
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
+            elif meta == 'changed': # Большая проблема. Не понимаю, как правильно отсеять
+                # вложенный словарь от обычного значения.
+                # у меня либо пропускает вложенный словарь, либо, если добавлю проверку на него,
+                # добавляет к нему лишние куски.
+                # if not isinstance(value[0], dict):
+                #     result.append(f'{get_indent("- ", depth)}{key}: '
+                #               f'{stylish(value[0]), depth + 1}')
+                result.append(f'{get_indent("- ", depth)}{key}: '
+                              f'{convert_value(value[0])}')
+                result.append(f'{get_indent("+ ", depth)}{key}: '
+                              f'{convert_value(value[1])}')
             else:
                 result.append(f'{indent}{key}: {convert_value(value)}')
         else:
