@@ -2,6 +2,7 @@ import json
 import yaml
 from .get_format import get_format
 
+
 def make_inner_view(file1, file2):
     tree = []
     keys = file1.keys() | file2.keys()
@@ -53,7 +54,7 @@ def parse_file(path):
     raise ValueError('Unsupported file format')
 
 
-def generate_diff(first_file, second_file, format_name= ''):
+def generate_diff(first_file, second_file, format_name=''):
     file1 = parse_file(first_file)
     file2 = parse_file(second_file)
     intermediate_result = make_inner_view(file1, file2)
