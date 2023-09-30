@@ -11,7 +11,7 @@ def parse_arguments():
     # Порядок назначения элементов влияет на очерёдность передачи.
     parser.add_argument('first_file')
     parser.add_argument('second_file')
-    # Назначемние позиционных рагументов,
+    # Назначемние позиционных рагументов, 
     # help - описание аргумента для представления -h
     # создание именованного аргумента
     parser.add_argument('-f', '--format', help='set format of output')
