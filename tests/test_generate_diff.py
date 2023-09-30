@@ -36,7 +36,7 @@ def test_generate_tree_yml_stylish_format():
     file2 = "./tests/fixtures/tree2.yml"
     with open("./tests/fixtures/correct_result_tree_stylish.txt") as cr:
         result = cr.read()
-        diff = generate_diff(file1, file2, formatter=stylish)
+        diff = generate_diff(file1, file2, format_name=stylish)
         assert result == diff
         
         
@@ -53,5 +53,5 @@ def test_generate_plain_format():
     file2 = "./tests/fixtures/tree2.yml"
     with open("./tests/fixtures/correct_result_tree_plain.txt") as cr:
         result = cr.read()
-        diff = generate_diff(file1, file2, formatter=plain)
+        diff = generate_diff(file1, file2, format_name=plain)
         assert result == diff
