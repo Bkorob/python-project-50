@@ -1,4 +1,4 @@
-from gendiff.formatters.stylish import convert_value
+from gendiff.formatters.stylish import CONVERTING_VALUE as CV
 
 
 def get_value(value):
@@ -6,7 +6,7 @@ def get_value(value):
         return '[complex value]'
     if isinstance(value, str):
         return f"'{value}'"
-    return convert_value(value)
+    return f'{CV.get(value)}'
 
 
 def get_path(previous_path, new_level):
@@ -22,10 +22,10 @@ def get_plain(data, key_name=''):
         if meta == 'children':
             result += get_plain(value, key_name + f".{key}")
         elif meta == 'changed':
-            result += (f"Property '{get_path(key_name, key)}' was updated." 
+            result += (f"Property '{get_path(key_name, key)}' was updated."
                        f" From {get_value(value[0])} to {get_value(value[1])}\n")
         elif meta == 'added':
-            result += (f"Property '{get_path(key_name, key)}'" 
+            result += (f"Property '{get_path(key_name, key)}'"
                        f" was added with value: {get_value(value)}\n")
         elif meta == 'deleted':
             result += f"Property '{get_path(key_name, key)}' was removed\n"
@@ -33,6 +33,5 @@ def get_plain(data, key_name=''):
 
 
 def plain(data):
-    val = get_plain(data, key_name='')
+    val = get_plain(data)
     return val.rstrip()
-

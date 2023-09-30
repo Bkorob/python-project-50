@@ -10,9 +10,16 @@ INDENTS = {'added': '+ ',
 DEFAULT_INDENT = 4
 
 
-def convert_value(value):
+def convert_value(value, depth):
     if isinstance(value, bool) or value is None:
         return CONVERTING_VALUE[value]
+    elif isinstance(value, dict):
+        key = list(value)[0]
+        indent_strt = get_indent("  ", depth + 1)
+        indent_fin = get_indent("  ", depth)
+        value = '{\n' + (f'{indent_strt}{key}'
+                         f': {value.get(key)}\n') + indent_fin + '}'
+        return value
     return value
 
 
@@ -38,24 +45,18 @@ def stylish(data, depth=1):
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
             elif meta == 'children':
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
-            elif meta == 'changed': # Большая проблема. Не понимаю, как правильно отсеять
-                # вложенный словарь от обычного значения.
-                # у меня либо пропускает вложенный словарь, либо, если добавлю проверку на него,
-                # добавляет к нему лишние куски.
-                # if not isinstance(value[0], dict):
-                #     result.append(f'{get_indent("- ", depth)}{key}: '
-                #               f'{stylish(value[0]), depth + 1}')
+            elif meta == 'changed':
                 result.append(f'{get_indent("- ", depth)}{key}: '
-                              f'{convert_value(value[0])}')
+                              f'{convert_value(value[0], depth)}')
                 result.append(f'{get_indent("+ ", depth)}{key}: '
-                              f'{convert_value(value[1])}')
+                              f'{convert_value(value[1], depth)}')
             else:
-                result.append(f'{indent}{key}: {convert_value(value)}')
+                result.append(f'{indent}{key}: {convert_value(value, depth)}')
         else:
             indent = get_indent("  ", depth)
             if isinstance(data[elem], dict):
                 result.append(f'{indent}{elem}: {stylish(data[elem], depth+1)}')
             else:
-                result.append(f'{indent}{elem}: {convert_value(data[elem])}')
+                result.append(f'{indent}{elem}: {convert_value(data[elem], depth)}')
     result.append(get_indent('  ', depth - 1) + '}')
     return '\n'.join(result)

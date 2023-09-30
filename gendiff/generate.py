@@ -1,7 +1,6 @@
 import json
 import yaml
 from .formatters.stylish import stylish
-from .formatters.plain import plain
 
 
 def make_inner_view(file1, file2):
