@@ -55,3 +55,12 @@ def test_generate_plain_format():
         result = cr.read()
         diff = generate_diff(file1, file2, format_name='plain')
         assert result == diff
+        
+        
+def test_generate_json_format():
+    file1 = "./tests/fixtures/tree1.yml"
+    file2 = "./tests/fixtures/tree2.yml"
+    with open("./tests/fixtures/correct_result_tree_json.txt") as cr:
+        result = cr.read()
+        diff = generate_diff(file1, file2, format_name='json')
+        assert result == diff

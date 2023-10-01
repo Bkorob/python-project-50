@@ -1,5 +1,5 @@
 import json
 
 
-def json(data):
+def get_json(data):
     return json.dumps(data, indent=2)
