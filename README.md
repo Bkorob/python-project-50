@@ -5,7 +5,7 @@
 <a href="https://codeclimate.com/github/Bkorob/python-project-50/test_coverage"><img src="https://api.codeclimate.com/v1/badges/944601b15d52bc6fcc84/test_coverage" /></a>
 
 
-<h1>Project name</h1>
+<h1>Project name:</h1>
 <div>
-<h2 style="color: #7FFF00; size: 20px">Вычислитель отличий – программа, которая определяет разницу между двумя структурами данных.</h2>
+<h2 style="color: #7FFF00; size: 120px">Вычислитель отличий – программа, которая определяет разницу между двумя структурами данных.</h2>
 </div>
