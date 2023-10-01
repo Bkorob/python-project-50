@@ -4,7 +4,7 @@
 <a href="https://codeclimate.com/github/Bkorob/python-project-50/maintainability"><img src="https://api.codeclimate.com/v1/badges/944601b15d52bc6fcc84/maintainability" /></a>
 <a href="https://codeclimate.com/github/Bkorob/python-project-50/test_coverage"><img src="https://api.codeclimate.com/v1/badges/944601b15d52bc6fcc84/test_coverage" /></a>
 
-
+<main>
 <h1>Project name:</h1>
 <div>
   <h2>Вычислитель отличий – программа, которая определяет разницу между двумя структурами данных.</h2>
@@ -16,3 +16,4 @@
     <li>Генерация отчета в виде plain text, stylish и json</li>
   </ul>
 </section>
+</main>
