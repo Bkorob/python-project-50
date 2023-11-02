@@ -22,7 +22,7 @@
 </section>
 <h2>Пример работы программы</h2>
 <h3>Запуск справки</h3>
-[![asciicast](https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5.svg)](https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5)
+<a href="https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5" target="_blank"><img src="https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5.svg" /></a>
 <section>
 
 </section>
