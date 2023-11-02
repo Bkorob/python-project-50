@@ -19,13 +19,14 @@
 </section>
 <section>
   <h2>Установка:</h2>
+  </section>
   ```bash
 git clone git@github.com:Bkorob/python-project-50.git
 cd python-project-50/
 # install poetry
 make install
 ```
-</section>
+
 <h2>Пример работы программы:</h2>
 <h3>Запуск справки:</h3>
 <a href="https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5" target="_blank"><img src="https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5.svg" /></a>
