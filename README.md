@@ -5,15 +5,25 @@
 <a href="https://codeclimate.com/github/Bkorob/python-project-50/test_coverage"><img src="https://api.codeclimate.com/v1/badges/944601b15d52bc6fcc84/test_coverage" /></a>
 
 <main>
-<h1>Project name:</h1>
+<h2>Project name:</h2>
 <div>
-  <p>Вычислитель отличий – программа, которая определяет разницу между двумя структурами данных.</p>
+  <h3>Вычислитель отличий</h3>
+  <p>программа, которая определяет разницу между двумя структурами данных.</p>
 </div>
 <section>
-  <h3>Возможности утилиты:</h3>
+  <h2>Возможности утилиты:</h2>
   <ul>
     <li>Поддержка разных входных форматов: yaml, json</li>
     <li>Генерация отчета в виде plain text, stylish и json</li>
   </ul>
+</section>
+<section>
+  <h2>Установка</h2>
+  <p>python3 -m pip install git+https:https://github.com/Bkorob/python-project-50</p>
+</section>
+<h2>Пример работы программы</h2>
+
+<section>
+
 </section>
 </main>
