@@ -5,9 +5,8 @@
 <a href="https://codeclimate.com/github/Bkorob/python-project-50/test_coverage"><img src="https://api.codeclimate.com/v1/badges/944601b15d52bc6fcc84/test_coverage" /></a>
 
 <main>
-<h2>Project name:</h2>
 <div>
-  <h3>Вычислитель отличий</h3>
+  <h2>Вычислитель отличий</h2>
   <p>программа, которая определяет разницу между двумя структурами данных.</p>
 </div>
 <section>
@@ -19,7 +18,7 @@
 </section>
 <section>
   <h2>Установка</h2>
-  <p>python3 -m pip install git+https:https://github.com/Bkorob/python-project-50</p>
+  <p>python3 -m pip install git+https://github.com/Bkorob/python-project-50</p>
 </section>
 <h2>Пример работы программы</h2>
 
