@@ -21,7 +21,8 @@
   <p>python3 -m pip install git+https://github.com/Bkorob/python-project-50</p>
 </section>
 <h2>Пример работы программы</h2>
-
+<h3>Запуск справки</h3>
+[![asciicast](https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5.svg)](https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5)
 <section>
 
 </section>
