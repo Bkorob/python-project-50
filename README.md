@@ -19,14 +19,14 @@
 </section>
 <section>
   <h2>Установка:</h2>
-  </section>
-  ```bash
-git clone git@github.com:Bkorob/python-project-50.git
-cd python-project-50/
-# install poetry
-make install
-```
-
+  <ul>
+    <li>git clone git@github.com:Bkorob/python-project-50.git</li>
+    <li>cd python-project-50/</li>
+    <li>install poetry</li>
+    <li>make install</li>
+  </ul>
+</section>
+<section>
 <h2>Пример работы программы:</h2>
 <h3>Запуск справки:</h3>
 <a href="https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5" target="_blank"><img src="https://asciinema.org/a/4ZLLD5CUkrPIrUy9sSUe7O8D5.svg" /></a>
@@ -40,7 +40,5 @@ make install
 <a href="https://asciinema.org/a/FF6G712aMIcIOA64E3zbpKPyM" target="_blank"><img src="https://asciinema.org/a/FF6G712aMIcIOA64E3zbpKPyM.svg" /></a>
 <h3>Вывод диффа в JSON-формате</h3>
 <a href="https://asciinema.org/a/3Ci99JvVLppnfa5PCbhEYtgEn" target="_blank"><img src="https://asciinema.org/a/3Ci99JvVLppnfa5PCbhEYtgEn.svg" /></a>
-<section>
-
 </section>
 </main>
