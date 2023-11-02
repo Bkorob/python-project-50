@@ -19,7 +19,7 @@
 <section>
   <h2>Установка:</h2>
   <a>python3 -m pip install git+https://github.com/Bkorob/python-project-50</a>
-  <p> команда ```make package-install```</p>
+  команда ```make package-install```
 </section>
 <h2>Пример работы программы:</h2>
 <h3>Запуск справки:</h3>
