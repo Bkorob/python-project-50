@@ -1,6 +1,7 @@
 CONVERTING_VALUE = {False: 'false',
                     None: 'null',
-                    True: 'true'
+                    True: 'true',
+                    0: 'false'
                     }
 INDENTS = {'added': '+ ',
            'deleted': '- ',
