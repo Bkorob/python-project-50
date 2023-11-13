@@ -1,4 +1,5 @@
 from gendiff.formatters.stylish import CONVERTING_VALUE as CV
+from json import dumps
 
 
 def get_value(value):
@@ -6,9 +7,9 @@ def get_value(value):
         return '[complex value]'
     if isinstance(value, str):
         return f"'{value}'"
-    if isinstance(value, int):
+    if value in [0, 1]:
         return value
-    return f'{CV.get(value)}'
+    return f'{dumps(value)}'
 
 
 
