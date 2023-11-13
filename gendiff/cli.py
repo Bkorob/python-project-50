@@ -14,7 +14,10 @@ def parse_arguments():
     # Назначемние позиционных рагументов,
     # help - описание аргумента для представления -h
     # создание именованного аргумента
-    parser.add_argument('-f', '--format', help='set format of output')
+    # дефолтным значением является "stylish"
+    parser.add_argument("-f", "--format", default='stylish',
+                        choices=['stylish', 'plain', 'json'],
+                        help='set format of output: stylish, plain or json')
     # parse_args создаёт структуру принимающую данные.
     args = parser.parse_args()
     return args
