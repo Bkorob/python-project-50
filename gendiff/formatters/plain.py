@@ -6,7 +6,10 @@ def get_value(value):
         return '[complex value]'
     if isinstance(value, str):
         return f"'{value}'"
+    if isinstance(value, int):
+        return value
     return f'{CV.get(value)}'
+
 
 
 def get_path(previous_path, new_level):
