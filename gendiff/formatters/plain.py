@@ -1,4 +1,4 @@
-from gendiff.formatters.stylish import CONVERTING_VALUE as CV
+# from gendiff.formatters.stylish import CONVERTING_VALUE as CV
 from json import dumps
 
 
@@ -7,14 +7,13 @@ def get_value(value):
         return '[complex value]'
     if isinstance(value, str):
         return f"'{value}'"
-    if value in [0, 1]:
-        return value
     return f'{dumps(value)}'
 
 
 
 def get_path(previous_path, new_level):
     return f'{previous_path}.{new_level}'[1:]
+
 
 
 def get_plain(data, key_name=''):
