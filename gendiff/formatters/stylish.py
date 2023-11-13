@@ -1,8 +1,6 @@
-CONVERTING_VALUE = {False: 'false',
-                    None: 'null',
-                    True: 'true',
-                    0: 'false'
-                    }
+from json import dumps
+
+
 INDENTS = {'added': '+ ',
            'deleted': '- ',
            'unchanged': '  ',
@@ -13,7 +11,7 @@ DEFAULT_INDENT = 4
 
 def convert_value(value, depth):
     if isinstance(value, bool) or value is None:
-        return CONVERTING_VALUE[value]
+        return dumps(value)
     elif isinstance(value, dict):
         key = list(value)[0]
         indent_strt = get_indent("  ", depth + 1)

@@ -10,10 +10,8 @@ def get_value(value):
     return f'{dumps(value)}'
 
 
-
 def get_path(previous_path, new_level):
     return f'{previous_path}.{new_level}'[1:]
-
 
 
 def get_plain(data, key_name=''):

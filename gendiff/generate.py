@@ -54,7 +54,7 @@ def parse_file(path):
     raise ValueError('Unsupported file format')
 
 
-def generate_diff(first_file, second_file, format_name=''):
+def generate_diff(first_file, second_file, format_name='stylish'):
     file1 = parse_file(first_file)
     file2 = parse_file(second_file)
     intermediate_result = make_inner_view(file1, file2)
