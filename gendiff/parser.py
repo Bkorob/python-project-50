@@ -13,5 +13,5 @@ def parse_file(source, format):
     if format in ['yaml', 'yml']:
         return yaml.safe_load(source)
     elif format == 'json':
-        return json.load(source)
+        return json.loads(source)
     raise ValueError('Unsupported file format')
