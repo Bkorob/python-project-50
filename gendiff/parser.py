@@ -7,8 +7,8 @@ def get_file(path):
     with open(path) as f:
         source = f.read()
         return parse_file(source, format)
-   
-    
+
+
 def parse_file(source, format):
     if format in ['yaml', 'yml']:
         return yaml.safe_load(source)
