@@ -1,6 +1,5 @@
-import json
-import yaml
 from .get_format import get_format
+from .parser import get_file
 
 
 def make_inner_view(file1, file2):
@@ -41,22 +40,9 @@ def make_inner_view(file1, file2):
     return tree
 
 
-def parse_file(path):
-    filepath = path.split('.')
-    if filepath[-1] in ['yaml', 'yml']:
-        with open(path) as p_y:
-            source = yaml.safe_load(p_y)
-            return source
-    elif filepath[-1] == 'json':
-        with open(path) as p_j:
-            source = json.load(p_j)
-            return source
-    raise ValueError('Unsupported file format')
-
-
 def generate_diff(first_file, second_file, format_name='stylish'):
-    file1 = parse_file(first_file)
-    file2 = parse_file(second_file)
+    file1 = get_file(first_file)
+    file2 = get_file(second_file)
     intermediate_result = make_inner_view(file1, file2)
     formatter = get_format(format_name)
     result = formatter(intermediate_result)
