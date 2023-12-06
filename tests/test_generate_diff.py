@@ -44,7 +44,5 @@ def test_generate_diff(file1, file2, format, correct_result):
 def test_unsupported_format_file():
     file1 = "./tests/fixtures/flat1.yml"
     file2 = "./tests/fixtures/flat2.txt"
-    try:
+    with pytest.raises(ValueError):
         generate_diff(file1, file2)
-    except ValueError as v:
-        assert v
