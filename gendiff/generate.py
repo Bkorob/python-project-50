@@ -1,49 +1,49 @@
 from .get_format import get_format
-from .parser import get_file
+from .parser import get_path
 
 
-def make_inner_view(file1, file2):
+def make_inner_view(data1, data2):
     tree = []
-    keys = file1.keys() | file2.keys()
+    keys = data1.keys() | data2.keys()
     for key in sorted(keys):
-        if key not in file2:
+        if key not in data2:
             tree.append({
                 'key': key,
-                'value': file1[key],
+                'value': data1[key],
                 'meta': 'deleted'
             })
-        elif key in file1 and key in file2:
-            if isinstance(file1[key], dict) and isinstance(file2[key], dict):
+        elif key in data1 and key in data2:
+            if all(map(lambda x: isinstance(x, dict), (data2[key], data1[key]))):
                 tree.append({
                     'key': key,
-                    'value': make_inner_view(file1[key], file2[key]),
+                    'value': make_inner_view(data1[key], data2[key]),
                     'meta': 'children'
                 })
-            elif file1[key] == file2[key]:
+            elif data1[key] == data2[key]:
                 tree.append({
                     'key': key,
-                    'value': file1[key],
+                    'value': data1[key],
                     'meta': 'unchanged'
                 })
-            elif file1[key] != file2[key]:
+            elif data1[key] != data2[key]:
                 tree.append({
                     'key': key,
-                    'value': (file1[key], file2[key]),
+                    'value': (data1[key], data2[key]),
                     'meta': 'changed'
                 })
         else:
             tree.append({
                 'key': key,
-                'value': file2[key],
+                'value': data2[key],
                 'meta': 'added'
             })
     return tree
 
 
-def generate_diff(first_file, second_file, format_name='stylish'):
-    file1 = get_file(first_file)
-    file2 = get_file(second_file)
-    intermediate_result = make_inner_view(file1, file2)
+def generate_diff(first_data, second_data, format_name='stylish'):
+    data1 = get_path(first_data)
+    data2 = get_path(second_data)
+    intermediate_result = make_inner_view(data1, data2)
     formatter = get_format(format_name)
     result = formatter(intermediate_result)
     return result
