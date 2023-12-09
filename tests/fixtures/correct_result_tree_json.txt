@@ -15,7 +15,7 @@
       {
         "key": "setting2",
         "value": 200,
-        "meta": "deleted"
+        "meta": "removed"
       },
       {
         "key": "setting3",
@@ -52,7 +52,7 @@
                 "meta": "changed"
               }
             ],
-            "meta": "children"
+            "meta": "nested"
           },
           {
             "key": "key",
@@ -65,10 +65,10 @@
             "meta": "added"
           }
         ],
-        "meta": "children"
+        "meta": "nested"
       }
     ],
-    "meta": "children"
+    "meta": "nested"
   },
   {
     "key": "group1",
@@ -97,7 +97,7 @@
         "meta": "changed"
       }
     ],
-    "meta": "children"
+    "meta": "nested"
   },
   {
     "key": "group2",
@@ -107,7 +107,7 @@
         "id": 45
       }
     },
-    "meta": "deleted"
+    "meta": "removed"
   },
   {
     "key": "group3",
