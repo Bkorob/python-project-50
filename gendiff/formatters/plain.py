@@ -20,7 +20,7 @@ def get_plain(data, key_name=''):
         key = elem['key']
         value = elem['value']
         meta = elem['meta']
-        if meta == 'children':
+        if meta == 'nested':
             result += get_plain(value, key_name + f".{key}")
         elif meta == 'changed':
             result += (f"Property '{get_path(key_name, key)}' was updated."
@@ -28,7 +28,7 @@ def get_plain(data, key_name=''):
         elif meta == 'added':
             result += (f"Property '{get_path(key_name, key)}'"
                        f" was added with value: {get_value(value)}\n")
-        elif meta == 'deleted':
+        elif meta == 'removed':
             result += f"Property '{get_path(key_name, key)}' was removed\n"
     return result
 

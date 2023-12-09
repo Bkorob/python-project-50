@@ -2,9 +2,9 @@ from json import dumps
 
 
 INDENTS = {'added': '+ ',
-           'deleted': '- ',
+           'removed': '- ',
            'unchanged': '  ',
-           'children': '  ',
+           'nested': '  ',
            }
 DEFAULT_INDENT = 4
 
@@ -42,7 +42,7 @@ def stylish(data, depth=1):
             indent = get_indent(meta, depth)
             if isinstance(value, dict):
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
-            elif meta == 'children':
+            elif meta == 'nested':
                 result.append(f'{indent}{key}: {stylish(value, depth + 1)}')
             elif meta == 'changed':
                 result.append(f'{get_indent("- ", depth)}{key}: '

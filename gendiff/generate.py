@@ -10,14 +10,14 @@ def make_inner_view(data1, data2):
             tree.append({
                 'key': key,
                 'value': data1[key],
-                'meta': 'deleted'
+                'meta': 'removed'
             })
         elif key in data1 and key in data2:
             if all(map(lambda x: isinstance(x, dict), (data2[key], data1[key]))):
                 tree.append({
                     'key': key,
                     'value': make_inner_view(data1[key], data2[key]),
-                    'meta': 'children'
+                    'meta': 'nested'
                 })
             elif data1[key] == data2[key]:
                 tree.append({
