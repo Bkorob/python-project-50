@@ -14,4 +14,4 @@ def parse_data(source, format):
         return yaml.safe_load(source)
     elif format == 'json':
         return json.loads(source)
-    raise ValueError('Unsupported file format')
+    raise ValueError('Unsupported data format')
