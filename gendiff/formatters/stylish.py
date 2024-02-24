@@ -17,7 +17,7 @@ def convert_value(value, depth):
         indent = get_indent("  ", depth)
         for key, val in value.items():
             if isinstance(val, dict):
-                result.append(f'{indent}{key}: ' \
+                result.append(f'{indent}{key}: '
                               f'{convert_value(val, depth + 1)}')
             else:
                 result.append(f'{indent}{key}: {convert_value(val, depth + 1)}')
